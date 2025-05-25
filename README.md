@@ -1,2 +1,2 @@
-# giropops-senhas-vai
-Desafio do Day-3 do PICK (Programa Intensivo em Containers e Kubernetes)
+# Giropops Senhas
+##Este repositório contém informações sobre como utilizar a aplicação [Giropops Senhas](https://github.com/badtuxx/giropops-senhas) a partir de um DockerFile.
