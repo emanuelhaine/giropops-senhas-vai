@@ -1,14 +1,14 @@
-FROM python:3.11
+FROM cgr.dev/chainguard/python:latest-dev
 
 WORKDIR /app
-# Check if copying all the app dir it will work
-COPY app/requirements.txt app/app.py .
-COPY app/templates templates/
+COPY app/requirements.txt .
+RUN pip install --user --no-cache-dir -r requirements.txt
+
+FROM cgr.dev/chainguard/python:latest
+COPY --from=0 /home/nonroot/.local/lib/python3.13/site-packages /home/nonroot/.local/lib/python3.13/site-packages
+COPY app/app.py .
 COPY app/static static/
-
-RUN pip install --no-cache-dir -r requirements.txt
-
+COPY app/templates templates/
 EXPOSE 5000
 
-CMD ["flask", "run", "--host=0.0.0.0"]
-
+ENTRYPOINT ["python3", "-m", "flask", "run", "--host=0.0.0.0"]
