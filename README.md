@@ -1,13 +1,13 @@
 # Giropops Senhas
 
-## Este reposit√≥rio cont√©m informa√ß√µes sobre como utilizar a aplica√ß√£o [Giropops Senhas](https://github.com/badtuxx/giropops-senhas) a partir de um DockerFile.
+## Este repositÛrio contÈm informaÁıes sobre como utilizar a aplicaÁ„o [Giropops Senhas](https://github.com/badtuxx/giropops-senhas) a partir de um DockerFile.
 
-Primeiramente, √© preciso garantir que tenha um container engine no SO que voc√™ for rodar a aplica√ß√£o. Atualmente podemos destacar duas tools que cumprem esse papel:
+Primeiramente, È preciso garantir que tenha um container engine no SO que vocÍ for rodar a aplicaÁ„o. Atualmente podemos destacar duas tools que cumprem esse papel:
 
 - [podman](https://podman.io/docs/installation)
 - [docker](https://docs.docker.com/engine/install/)
 
-As instru√ß√µes a seguir est√£o levando em considera√ß√£o que o Docker esteja instalado, por√©m, caso voc√™ opte pelo Podman, algumas modifica√ß√µes talvez sejam necess√°rias.
+As instruÁıes a seguir est„o levando em consideraÁ„o que o Docker esteja instalado, porÈm, caso vocÍ opte pelo Podman, algumas modificaÁıes talvez sejam necess·rias.
 
 Essa aplica√ß√£o sensacional, o Giropops Senhas, necessita dos requisitos abaixo:
 
@@ -15,7 +15,7 @@ Essa aplica√ß√£o sensacional, o Giropops Senhas, necessita dos requisitos abaixo
 - flask
 - redis
 
-As depend√™ncias relacionadas ao Python est√£o sendo tratadas no Dockerfile e no arquivo requirements.txt, restando somente o Redis, que ser√° necess√°rio utilizar em um container separado, pois a ideia √© ter uma imagem dessa aplica√ß√£o que seja o mais enxuta poss√≠vel.
+As dependÍncias relacionadas ao Python est„o sendo tratadas no Dockerfile e no arquivo requirements.txt, restando somente o Redis, que ser· necess·rio utilizar em um container separado, pois a ideia È ter uma imagem dessa aplicaÁ„o que seja o mais enxuta possÌvel.
 
 Inicie um container do Redis e garanta que a porta 6379 esteja ativa no SO:
 
@@ -23,27 +23,27 @@ Inicie um container do Redis e garanta que a porta 6379 esteja ativa no SO:
 docker run -d -p 6379:6379 --restart=always --name redis redis
 ```
 
-Antes de executar o container, garanta que n√o h√°nenhum servi√o em execu√√o no SO que esteja utilizando a porta 6379/TCP. Os comandos abaixo ajudar√o a identificar caso haja alguma coisa:
+Antes de executar o container, garanta que n√o h· nenhum serviÁo em execuÁ„o no SO que esteja utilizando a porta 6379/TCP. Os comandos abaixo ajudar„o a identificar caso haja alguma coisa:
 
 ```
 sudo ss -nltpu | grep -w 6379
 sudo lsof -i :6379
 ```
 
-Ap√s garantir que o redis est√ sendo executado pelo Docker e que a porta ativa √ a 6379/TCP, j√°podemos fazer o build do Dockerfile:
+ApÛs garantir que o redis est· sendo executado pelo Docker e que a porta ativa È a 6379/TCP, j· podemos fazer o build do Dockerfile:
 
 ```
 cd <repo-dir>
 docker image build -t <image-name> .
 ```
 
-Caso o build ocorra com sucesso, verfique a imagem rec√©mcriada com o comando abaixo:
+Caso o build ocorra com sucesso, verfique a imagem recÈm criada com o comando abaixo:
 
 ```
 docker image ls
 ```
 
-Feito isso, √©hora que iniciar a apica√√o:
+Feito isso, È hora de iniciar a aplicaÁ„o:
 
 ```
 docker run -d -p 5000:5000 --restart=always --name <container-name> -e REDIS_HOST=<host-OS-IP> <image-name>
