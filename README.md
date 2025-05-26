@@ -37,7 +37,7 @@ cd <repo-dir>
 docker image build -t <image-name> .
 ```
 
-Caso o build ocorra com sucesso, verfique a imagem rec√m criada com o comando abaixo:
+Caso o build ocorra com sucesso, verfique a imagem rec√©mcriada com o comando abaixo:
 
 ```
 docker image ls
